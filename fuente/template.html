@@ -316,6 +316,13 @@ footer{background:var(--sunk)}
 .scrim{-webkit-backdrop-filter:none;backdrop-filter:none}
 .opt input,.range input{accent-color:var(--fg)}
 .v3tools .btn[aria-pressed="true"]{background:var(--sunk);border-color:var(--fg)}
+
+/* images never push their box wider/taller than the card */
+.showcase button,.card,.strip button .ci,.ph,.citem .ph{overflow:hidden;min-width:0}
+.showcase .art{min-width:0;min-height:0;width:100%;overflow:hidden}
+.ph img,.showcase img,.strip .ci img,.citem .ph img{min-width:0;min-height:0;max-width:100%;max-height:100%;width:100%;height:100%;object-fit:contain}
+.showcase button{align-content:start}
+.showcase span{min-width:0;width:100%}
 </style>
 
 <script type="application/json" id="catalogo">__CATALOGO__</script>
@@ -769,7 +776,7 @@ footer{background:var(--sunk)}
     var parts=(x.color||"").split(/\s+con\s+/i),mb=mat(parts[0]||"blanco"),mf=mat(parts[1]||parts[0]||"blanco");
     var Dc=D-T3,zc=-T3/2,z=D/2-T3/2,y0=0;
     if(k==="aereo"){
-      y0=.25;var wall=new THREE.Mesh(new THREE.PlaneGeometry(W+1.6,H+1.2),new THREE.MeshStandardMaterial({color:new THREE.Color(cssVar("--surface")||"#ffffff"),roughness:.95}));wall.position.set(0,y0+H/2,-D/2-.002);wall.receiveShadow=true;V.grp.add(wall);
+      y0=.25;
       carcass(W,H,Dc,y0,mb,zc);shelf(W,y0+H/2,Dc,mb,zc);doorRow(-W/2,W/2,y0,y0+H,nd(W,.45),mf,z);
     }else if(k==="bajo"){
       var pl=.08,top=H-.03,dr=.15,n=nd(W,.5),cw=W/n;

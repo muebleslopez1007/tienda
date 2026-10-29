@@ -23,6 +23,19 @@ def photo_uri(path, max_side=900):
         mt = mimetypes.guess_type(path)[0] or "image/jpeg"
         return f"data:{mt};base64," + base64.b64encode(open(path, "rb").read()).decode()
 
+def edge_color(path):
+    """Average colour of the photo's border, used to fill around it so the whole piece shows."""
+    try:
+        from PIL import Image
+        im = Image.open(path).convert("RGB"); im.thumbnail((64, 64))
+        w, h = im.size; px = im.load()
+        xs = [int(w * f) for f in (0.06, 0.1, 0.9, 0.94)]
+        pts = [px[x, y] for y in range(int(h * .1), int(h * .9)) for x in xs]
+        r, g, bl = (sorted(p[i] for p in pts)[len(pts) // 2] for i in range(3))
+        return "#%02x%02x%02x" % (r, g, bl)
+    except Exception:
+        return ""
+
 def from_inventory(folder, fotos_dir):
     out = []
     for f in sorted(glob.glob(os.path.join(folder, "**", "*.json"), recursive=True)):
@@ -35,6 +48,8 @@ def from_inventory(folder, fotos_dir):
             hits = glob.glob(os.path.join(fotos_dir or "", f"{fid}.*")) if fotos_dir else []
             if hits:
                 urls.append(photo_uri(hits[0]))
+                if "fotoBg" not in item:
+                    item["fotoBg"] = edge_color(hits[0])
         if urls:
             item["fotosUrl"] = urls
         out.append(item)

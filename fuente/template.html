@@ -449,6 +449,10 @@ footer h3,footer a,footer a:hover{color:#fff}
 footer p,footer ul{color:rgb(255 255 255/.85)}
 footer .legal{border-top-color:rgb(255 255 255/.25);color:rgb(255 255 255/.75)}
 footer .flogo{background:#fff;padding:6px;border-radius:6px}
+
+/* real photos fill their tile; 3D renders stay contained */
+.ph:has(img.real),.strip button .ci:has(img.real){padding:0}
+.ph img.real,.strip .ci img.real,.citem .ph img.real{object-fit:contain}
 </style>
 
 <script type="application/json" id="datosCatalogo">__CATALOGO__</script>
@@ -635,7 +639,7 @@ footer .flogo{background:#fff;padding:6px;border-radius:6px}
   }
   var hasPhoto=function(x){return !!(x.fotosUrl&&x.fotosUrl[0])};
   var photo=function(x){
-    if(hasPhoto(x))return '<img src="'+esc(x.fotosUrl[0])+'" alt="'+esc(title(x))+'" loading="lazy">';
+    if(hasPhoto(x)){var bg=/^#[0-9a-f]{6}$/i.test(x.fotoBg||"")?x.fotoBg:"";return '<img class="real" src="'+esc(x.fotosUrl[0])+'" alt="'+esc(title(x))+'" loading="lazy"'+(bg?' style="background:'+bg+'"':'')+'>'}
     if(typeof TH!=="undefined"&&TH[x.id])return '<img src="'+TH[x.id]+'" alt="Imagen referencial en 3D de '+esc(title(x))+'">';
     return draw(x)};
   var avail=function(x){return inStock(x)?{c:"ok",t:Number(x.stock)===1?"Última unidad":x.stock+" disponibles"}:{c:"order",t:"Bajo pedido"}};

@@ -845,7 +845,7 @@ footer .flogo{background:#fff;padding:6px;border-radius:6px}
     if(/closet|armario|ropero/.test(t))return "closet";
     if(/cama/.test(t))return "cama";
     return "caja";}
-  var DEF={aereo:[.60,.30],bajo:[.85,.55],micro:[1.50,.40],tv:[.50,.40],zapatera:[1.00,.30],closet:[2.10,.55],cama:[1.00,2.00],caja:[.80,.40]};
+  var DEF={aereo:[.60,.30],bajo:[.85,.55],micro:[1.70,.40],tv:[.50,.40],zapatera:[1.00,.30],closet:[2.10,.55],cama:[1.00,2.00],caja:[.80,.40]};
   var PAL=[["nogal","#9a6a43"],["milano","#9a6a43"],["café","#6b4329"],["cafe","#6b4329"],["chocolate","#4a2e1f"],["wengue","#3e2a1e"],["roble","#b08455"],["natural","#c9a175"],["cedro","#a5643c"],["gris","#8b8e91"],["humo","#5d5e60"],["negro","#262626"],["beige","#d9c9ad"],["blanco","#f2f0ec"]];
   function hexOf(w){w=(w||"").toLowerCase();for(var i=0;i<PAL.length;i++)if(w.indexOf(PAL[i][0])>=0)return PAL[i][1];return "#d8d2c8"}
   function woody(w){return /nogal|milano|caf|chocolate|wengue|roble|natural|cedro/.test((w||"").toLowerCase())}
@@ -861,11 +861,21 @@ footer .flogo{background:#fff;padding:6px;border-radius:6px}
     box(W-2*T3,T3,Dc,mb,0,y0+H-T3/2,zc);box(W-2*T3,T3,Dc,mb,0,y0+T3/2,zc);
     box(W-2*T3,H-2*T3,.006,mb,0,y0+H/2,zc-Dc/2+.003)}
   function shelf(w,y,Dc,mb,zc){box(w-2*T3,T3,Dc-.02,mb,0,y,zc+.01)}
-  function door(x0,x1,ya,yb,hinge,mf,z){
-    var w=x1-x0-G3*2,h=yb-ya-G3*2,p=new THREE.Group();
+  function door(x0,x1,ya,yb,hinge,mf,z,hl){
+    var w=x1-x0-G3*2,h=yb-ya-G3*2,p=new THREE.Group();hl=hl||Math.min(.12,h*.4);
     if(hinge==="B"){p.position.set((x0+x1)/2,ya+G3,z);box(w,h,T3,mf,0,h/2,0,p);box(Math.min(.14,w*.5),.012,.02,V.mHandle,0,h-.04,T3/2+.01,p)}
-    else{var s=hinge==="L"?1:-1;p.position.set(hinge==="L"?x0+G3:x1-G3,(ya+yb)/2,z);box(w,h,T3,mf,s*w/2,0,0,p);box(.012,Math.min(.12,h*.4),.02,V.mHandle,s*(w-.035),0,T3/2+.01,p)}
+    else{var s=hinge==="L"?1:-1;p.position.set(hinge==="L"?x0+G3:x1-G3,(ya+yb)/2,z);box(w,h,T3,mf,s*w/2,0,0,p);box(.012,hl,.02,V.mHandle,s*(w-.035),0,T3/2+.01,p)}
     V.grp.add(p);V.doors.push({p:p,t:hinge})}
+  function glassDoor(x0,x1,ya,yb,hinge,mf,z,hl){
+    var w=x1-x0-G3*2,h=yb-ya-G3*2,p=new THREE.Group(),s=hinge==="L"?1:-1,sw=Math.min(.06,w*.2),rh=.035;
+    if(!V.mGlass)V.mGlass=new THREE.MeshStandardMaterial({color:0xdfe7ea,transparent:true,opacity:.55,roughness:.2,metalness:.1});
+    p.position.set(hinge==="L"?x0+G3:x1-G3,(ya+yb)/2,z);
+    box(sw,h,T3,mf,s*sw/2,0,0,p);box(sw,h,T3,mf,s*(w-sw/2),0,0,p);
+    box(w-2*sw,rh,T3,mf,s*w/2,h/2-rh/2,0,p);box(w-2*sw,rh,T3,mf,s*w/2,-h/2+rh/2,0,p);
+    var g=box(w-2*sw,h-2*rh,.006,V.mGlass,s*w/2,0,0,p);g.castShadow=false;
+    box(.012,hl||Math.min(.16,h*.4),.02,V.mHandle,s*(w-sw/2),0,T3/2+.01,p);
+    V.grp.add(p);V.doors.push({p:p,t:hinge})}
+  function wheel(x,z){if(!V.mDark)V.mDark=new THREE.MeshStandardMaterial({color:0x1c1c1e,roughness:.5});var m=new THREE.Mesh(new THREE.CylinderGeometry(.022,.022,.02,18),V.mDark);m.rotation.z=Math.PI/2;m.position.set(x,.022,z);m.castShadow=true;V.grp.add(m)}
   function drawer(x0,x1,ya,yb,mf,mb,z,depth){
     var w=x1-x0-G3*2,h=yb-ya-G3*2,p=new THREE.Group();p.position.set((x0+x1)/2,(ya+yb)/2,z);
     box(w,h,T3,mf,0,0,0,p);box(w-.05,h*.7,depth,mb,0,-h*.1,-depth/2-T3/2,p);box(Math.min(.14,w*.4),.012,.02,V.mHandle,0,h*.15,T3/2+.01,p);
@@ -956,12 +966,17 @@ footer .flogo{background:#fff;padding:6px;border-radius:6px}
       box(W+.02,.03,D+.03,new THREE.MeshStandardMaterial({color:0x5a5652,roughness:.35}),0,H-.015,.015);
       for(var i=0;i<n;i++){var a=-W/2+i*cw;drawer(a,a+cw,top-dr,top,mf,mb,z,Dc-.06);door(a,a+cw,pl,top-dr,(n>1&&i%2===1)?"R":"L",mf,z)}
     }else if(k==="micro"){
-      var lo=Math.min(.72,H*.48),hi=Math.min(lo+.36,H-.2),nm=W>=.7?2:1;
-      carcass(W,H,Dc,0,mb,zc);shelf(W,lo,Dc,mb,zc);shelf(W,hi,Dc,mb,zc);
-      doorRow(-W/2,W/2,0,lo,nm,mf,z);doorRow(-W/2,W/2,hi,H,nm,mf,z);
-      var mw=Math.min(W-.1,.5),mh=Math.min(.28,hi-lo-.05),md=Math.min(Dc-.06,.36),dark=new THREE.MeshStandardMaterial({color:0x2b2b2b,roughness:.4});
-      box(mw,mh,md,dark,0,lo+T3/2+mh/2,zc-Dc/2+md/2+.02);
-      box(mw*.62,mh*.7,.004,new THREE.MeshStandardMaterial({color:0x111418,roughness:.1,metalness:.3}),-mw*.13,lo+T3/2+mh/2,zc-Dc/2+md+.022);
+      /* modelo basado en la foto del MUE-004: cuerpo blanco, frentes de madera, vitrina arriba, hueco para microondas,
+         cajón, dos puertas abajo, jaladeras largas y ruedas */
+      var yb=.045,Hc=H-yb,y1=yb+Hc*.355,y2=yb+Hc*.47,y3=yb+Hc*.665,half=W/2;
+      [-1,1].forEach(function(sx){[-1,1].forEach(function(sz){wheel(sx*(half-.05),sz*(D/2-.06))})});
+      carcass(W,Hc,Dc,yb,mb,zc);
+      shelf(W,y1,Dc,mb,zc);shelf(W,y2,Dc,mb,zc);shelf(W,y3,Dc,mb,zc);
+      door(-half,0,yb,y1,"L",mf,z,Math.min(.26,(y1-yb)*.45));door(0,half,yb,y1,"R",mf,z,Math.min(.26,(y1-yb)*.45));
+      drawer(-half,half,y1,y2,mf,mb,z,Dc-.06);
+      if(!V.mDark)V.mDark=new THREE.MeshStandardMaterial({color:0x1c1c1e,roughness:.5});
+      var hole=new THREE.Mesh(new THREE.CylinderGeometry(.026,.026,.008,24),V.mDark);hole.rotation.x=Math.PI/2;hole.position.set(-W*.16,y2+(y3-y2)*.42,zc-Dc/2+.008);V.grp.add(hole);
+      glassDoor(-half,0,y3,yb+Hc,"L",mf,z);glassDoor(0,half,y3,yb+Hc,"R",mf,z);
     }else if(k==="tv"){
       carcass(W,H,Dc,0,mb,zc);
       if(W>=1.1){var c3=W/3;box(T3,H-2*T3,Dc,mb,-W/2+c3,H/2,zc);box(T3,H-2*T3,Dc,mb,W/2-c3,H/2,zc);box(c3-T3,T3,Dc-.02,mb,0,H/2,zc+.01);door(-W/2,-W/2+c3,0,H,"L",mf,z);door(W/2-c3,W/2,0,H,"R",mf,z)}

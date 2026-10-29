@@ -846,7 +846,7 @@ footer .flogo{background:#fff;padding:6px;border-radius:6px}
     if(/cama/.test(t))return "cama";
     return "caja";}
   var DEF={aereo:[.60,.30],bajo:[.85,.55],micro:[1.70,.40],tv:[.50,.40],zapatera:[1.00,.30],closet:[2.10,.55],cama:[1.00,2.00],caja:[.80,.40]};
-  var PAL=[["nogal","#9a6a43"],["milano","#9a6a43"],["café","#6b4329"],["cafe","#6b4329"],["chocolate","#4a2e1f"],["wengue","#3e2a1e"],["roble","#b08455"],["natural","#c9a175"],["cedro","#a5643c"],["gris","#8b8e91"],["humo","#5d5e60"],["negro","#262626"],["beige","#d9c9ad"],["blanco","#f2f0ec"]];
+  var PAL=[["nogal","#c09468"],["milano","#c09468"],["café","#6b4329"],["cafe","#6b4329"],["chocolate","#4a2e1f"],["wengue","#3e2a1e"],["roble","#b08455"],["natural","#c9a175"],["cedro","#a5643c"],["gris","#8b8e91"],["humo","#5d5e60"],["negro","#262626"],["beige","#d9c9ad"],["blanco","#f2f0ec"]];
   function hexOf(w){w=(w||"").toLowerCase();for(var i=0;i<PAL.length;i++)if(w.indexOf(PAL[i][0])>=0)return PAL[i][1];return "#d8d2c8"}
   function woody(w){return /nogal|milano|caf|chocolate|wengue|roble|natural|cedro/.test((w||"").toLowerCase())}
   function woodTex(hex){
@@ -901,7 +901,7 @@ footer .flogo{background:#fff;padding:6px;border-radius:6px}
     g.add(sprite(fmtM(D,ap.d),rx+s*1.7,y0+s*.7,0,s));
     return g}
   function stage3(scene){
-    if(!V.mHandle)V.mHandle=new THREE.MeshStandardMaterial({color:0x9da1a6,metalness:.6,roughness:.35});
+    if(!V.mHandle)V.mHandle=new THREE.MeshStandardMaterial({color:0xd4d6d9,metalness:.35,roughness:.3});
     scene.add(new THREE.HemisphereLight(0xffffff,0xb9a99f,.75));
     var dl=new THREE.DirectionalLight(0xffffff,.8);dl.position.set(2.5,4,3);dl.castShadow=true;dl.shadow.mapSize.set(1024,1024);
     var sc=dl.shadow.camera;sc.left=-3;sc.right=3;sc.top=3;sc.bottom=-3;sc.near=.5;sc.far=14;dl.shadow.bias=-.0005;scene.add(dl);

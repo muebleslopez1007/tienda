@@ -417,6 +417,38 @@ footer .flogo{filter:none}
 @media (max-width:900px){footer .fgrid{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){footer .fgrid{grid-template-columns:minmax(0,1fr)}}
 .card{height:100%}
+
+/* ===== Brand red where the owner asked for it ===== */
+:root{--red-2:#7a1f17;--red-bg:#94281e;--on-red:#ffffff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--red-2:#c44a3c;--red-bg:#8f2a20;--on-red:#ffffff}}
+:root[data-theme="dark"]{--red-2:#c44a3c;--red-bg:#8f2a20;--on-red:#ffffff}
+/* 1. banner buttons */
+.bcopy .btn-solid{background:var(--red-bg);color:var(--on-red);border:1px solid var(--red-bg)}
+.bcopy .btn-solid:hover{background:var(--red-2);border-color:var(--red-2)}
+.bcopy .btn-line{border:1px solid var(--red-bg);color:var(--red-bg);background:transparent}
+.bcopy .btn-line:hover{background:var(--red-bg);color:var(--on-red)}
+/* 2. "otra medida" block */
+.sdark{background:var(--red-bg);color:var(--on-red)}
+.sdark h2{color:var(--on-red)}
+.sdark p{color:rgb(255 255 255/.86)}
+.slink{color:var(--on-red);border-bottom-color:rgb(255 255 255/.85)}
+.slink:hover{color:#fff;border-bottom-color:#fff}
+/* 3. product buttons */
+.buy{background:var(--red-bg);color:var(--on-red);border:1px solid var(--red-bg)}
+.buy:hover{background:var(--red-2);border-color:var(--red-2)}
+.add{border:1px solid var(--red-bg);color:var(--red-bg);background:transparent}
+.add:hover{background:var(--red-bg);color:var(--on-red)}
+.add,.buy{font-size:13.5px;padding:10px 8px;white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.acts{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+.btn.wa{background:var(--red-bg);color:var(--on-red)}
+/* 4. social chips + footer */
+.soclinks a{border-color:var(--red-bg);color:var(--red-bg)}
+.soclinks a:hover{background:var(--red-bg);color:var(--on-red);border-color:var(--red-bg)}
+footer{background:var(--red-bg)!important;color:var(--on-red)}
+footer h3,footer a,footer a:hover{color:#fff}
+footer p,footer ul{color:rgb(255 255 255/.85)}
+footer .legal{border-top-color:rgb(255 255 255/.25);color:rgb(255 255 255/.75)}
+footer .flogo{background:#fff;padding:6px;border-radius:6px}
 </style>
 
 <script type="application/json" id="datosCatalogo">__CATALOGO__</script>

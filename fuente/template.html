@@ -8,9 +8,9 @@
    logo's oxblood appears only in the logo and the price on offers. */
 :root{
   --bg:#f5f5f7; --surface:#ffffff; --sunk:#f5f5f7; --line:#d2d2d7; --fg:#1d1d1f; --muted:#6e6e73;
-  --blue:#0071e3; --blue-h:#0077ed; --on-blue:#ffffff; --pill:#e8e8ed;
-  --brand:#0071e3; --brand-deep:#0058b0; --on-brand:#ffffff; --brand-soft:#e8f1fc; --wood:#86868b; --wood-soft:#f5f5f7;
-  --price:#1d1d1f; --wa:#0071e3; --on-wa:#ffffff; --ok:#008009; --ok-soft:#e6f4e6; --warn:#b64400; --warn-soft:#fdf0e8; --offer:#bf4800;
+  --blue:#1d1d1f; --blue-h:#000000; --on-blue:#ffffff; --pill:#ececef; --red:#94281e;
+  --brand:#1d1d1f; --brand-deep:#000000; --on-brand:#ffffff; --brand-soft:#f4ecea; --wood:#86868b; --wood-soft:#f5f5f7;
+  --price:#1d1d1f; --wa:#1d1d1f; --on-wa:#ffffff; --ok:#2e7d4f; --ok-soft:#e6f2ea; --warn:#8a5a14; --warn-soft:#f6eedd; --offer:#94281e;
   --f-display:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter","Segoe UI",Roboto,"Helvetica Neue",sans-serif;
   --f-body:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter","Segoe UI",Roboto,"Helvetica Neue",sans-serif;
   --f-mono:var(--f-body);
@@ -21,15 +21,15 @@
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#000000; --surface:#1d1d1f; --sunk:#161617; --line:#424245; --fg:#f5f5f7; --muted:#a1a1a6;
-  --blue:#2997ff; --blue-h:#47a6ff; --on-blue:#ffffff; --pill:#333336;
-  --brand:#2997ff; --brand-deep:#0a84ff; --on-brand:#ffffff; --brand-soft:#0f2a44; --wood:#a1a1a6; --wood-soft:#161617;
-  --price:#f5f5f7; --wa:#0a84ff; --on-wa:#ffffff; --ok:#30d158; --ok-soft:#0f2e19; --warn:#ff9f0a; --warn-soft:#33240a; --offer:#ff9f0a;
+  --blue:#f5f5f7; --blue-h:#ffffff; --on-blue:#1d1d1f; --pill:#2c2c2e; --red:#e0604f;
+  --brand:#f5f5f7; --brand-deep:#ffffff; --on-brand:#1d1d1f; --brand-soft:#2e1e1c; --wood:#a1a1a6; --wood-soft:#161617;
+  --price:#f5f5f7; --wa:#f5f5f7; --on-wa:#1d1d1f; --ok:#5fbf7a; --ok-soft:#0f2e19; --warn:#e2b36a; --warn-soft:#33240a; --offer:#e0604f;
   --shadow:0 0 0 1px rgb(255 255 255/.06); --shadow-h:0 0 0 1px rgb(255 255 255/.14); --nav:rgb(22 22 23/.8); color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#000000; --surface:#1d1d1f; --sunk:#161617; --line:#424245; --fg:#f5f5f7; --muted:#a1a1a6;
-  --blue:#2997ff; --blue-h:#47a6ff; --on-blue:#ffffff; --pill:#333336;
-  --brand:#2997ff; --brand-deep:#0a84ff; --on-brand:#ffffff; --brand-soft:#0f2a44; --wood:#a1a1a6; --wood-soft:#161617;
-  --price:#f5f5f7; --wa:#0a84ff; --on-wa:#ffffff; --ok:#30d158; --ok-soft:#0f2e19; --warn:#ff9f0a; --warn-soft:#33240a; --offer:#ff9f0a;
+  --blue:#f5f5f7; --blue-h:#ffffff; --on-blue:#1d1d1f; --pill:#2c2c2e; --red:#e0604f;
+  --brand:#f5f5f7; --brand-deep:#ffffff; --on-brand:#1d1d1f; --brand-soft:#2e1e1c; --wood:#a1a1a6; --wood-soft:#161617;
+  --price:#f5f5f7; --wa:#f5f5f7; --on-wa:#1d1d1f; --ok:#5fbf7a; --ok-soft:#0f2e19; --warn:#e2b36a; --warn-soft:#33240a; --offer:#e0604f;
   --shadow:0 0 0 1px rgb(255 255 255/.06); --shadow-h:0 0 0 1px rgb(255 255 255/.14); --nav:rgb(22 22 23/.8); color-scheme:dark}
 
 *{box-sizing:border-box}
@@ -277,72 +277,45 @@ label.f .hint{font-weight:400;color:var(--muted);font-size:12.5px}
 @media (prefers-reduced-motion:reduce){.side{transition:none}}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:8px;font-size:14px;z-index:20;max-width:calc(100% - 32px)}
 
-/* ===== Glass theme: brand red glow behind frosted surfaces ===== */
-:root{
-  --bg:#f4f1f1; --sunk:#eeeaea; --fg:#1d1416; --muted:#6f5f61; --line:rgb(120 40 30/.14);
-  --red1:#c7372a; --red2:#94281e; --red-glow:rgb(148 40 30/.45);
-  --blue:#a8261b; --blue-h:#c02c20; --link:#a8261b; --offer:#a8261b; --wa:#a8261b; --brand:#a8261b; --brand-soft:rgb(168 38 27/.1);
-  --surface:rgb(255 255 255/.58); --glass:rgb(255 255 255/.78); --glass-strong:rgb(255 255 255/.72); --glass-line:rgb(255 255 255/.7); --glass-hi:rgb(255 255 255/.85);
-  --pill:rgb(255 255 255/.55); --nav:rgb(255 250 249/.6);
-  --glow1:rgb(199 55 42/.55); --glow2:rgb(255 140 115/.45); --glow3:rgb(148 40 30/.40); --glow4:rgb(255 200 185/.55);
-  --shadow:inset 0 1px 0 var(--glass-hi),0 10px 30px -12px rgb(120 25 15/.28);
-  --shadow-h:inset 0 1px 0 var(--glass-hi),0 18px 40px -14px rgb(120 25 15/.4);
-  --blur:blur(22px) saturate(170%);
-}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0f0b0c; --sunk:#1a1416; --fg:#f8eeee; --muted:#c3a9ab; --line:rgb(255 255 255/.12);
-  --red1:#e04a3c; --red2:#a8261b; --red-glow:rgb(224 74 60/.5);
-  --blue:#ff7d6e; --blue-h:#ff998c; --link:#ff8a7c; --offer:#ff8a7c; --wa:#e04a3c; --brand:#ff7d6e; --brand-soft:rgb(255 125 110/.14);
-  --surface:rgb(40 18 22/.55); --glass:rgb(255 255 255/.06); --glass-strong:rgb(38 16 20/.78); --glass-line:rgb(255 255 255/.12); --glass-hi:rgb(255 255 255/.14);
-  --pill:rgb(255 255 255/.08); --nav:rgb(26 10 13/.55);
-  --glow1:rgb(200 40 30/.55); --glow2:rgb(255 90 60/.25); --glow3:rgb(120 20 30/.6); --glow4:rgb(255 120 100/.18);
-  --shadow:inset 0 1px 0 var(--glass-hi),0 10px 30px -12px rgb(0 0 0/.6); --shadow-h:inset 0 1px 0 var(--glass-hi),0 18px 44px -14px rgb(0 0 0/.75); color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#0f0b0c; --sunk:#1a1416; --fg:#f8eeee; --muted:#c3a9ab; --line:rgb(255 255 255/.12);
-  --red1:#e04a3c; --red2:#a8261b; --red-glow:rgb(224 74 60/.5);
-  --blue:#ff7d6e; --blue-h:#ff998c; --link:#ff8a7c; --offer:#ff8a7c; --wa:#e04a3c; --brand:#ff7d6e; --brand-soft:rgb(255 125 110/.14);
-  --surface:rgb(40 18 22/.55); --glass:rgb(255 255 255/.06); --glass-strong:rgb(38 16 20/.78); --glass-line:rgb(255 255 255/.12); --glass-hi:rgb(255 255 255/.14);
-  --pill:rgb(255 255 255/.08); --nav:rgb(26 10 13/.55);
-  --glow1:rgb(200 40 30/.55); --glow2:rgb(255 90 60/.25); --glow3:rgb(120 20 30/.6); --glow4:rgb(255 120 100/.18);
-  --shadow:inset 0 1px 0 var(--glass-hi),0 10px 30px -12px rgb(0 0 0/.6); --shadow-h:inset 0 1px 0 var(--glass-hi),0 18px 44px -14px rgb(0 0 0/.75); color-scheme:dark}
-
-body{background:var(--bg);position:relative;isolation:isolate}
-body::before{content:none}
-
-/* the frosted material */
-.top,.card,.showcase button,.promise,.strip button .ci,.empty,.notice,.tag,.sheet,.v3d,.v3hint,.side .box,.sortbar select,.filterbtn,.btn,.add,.searchbox input,footer,.announce{
-  -webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur)}
-.card,.showcase button,.promise,.strip button .ci,.empty,.notice{background:var(--glass);border:1px solid var(--glass-line);box-shadow:var(--shadow)}
-.card:hover,.showcase button:hover{box-shadow:var(--shadow-h)}
-.ph,button.ph{background:transparent}
-.top{background:var(--nav);border-bottom:1px solid var(--glass-line);box-shadow:0 1px 0 var(--line)}
-.announce{background:linear-gradient(90deg,var(--red2),var(--red1));color:#fff}
-.announce a{color:#fff;text-decoration:underline;text-underline-offset:3px}
-.searchbox input{background:var(--pill);border:1px solid var(--glass-line);box-shadow:inset 0 1px 0 var(--glass-hi)}
-.searchbox input:focus{box-shadow:0 0 0 3px var(--brand-soft),inset 0 1px 0 var(--glass-hi)}
-.side .box{background:var(--glass);border:1px solid var(--glass-line);border-radius:var(--r-lg);padding:18px 18px 20px;box-shadow:var(--shadow)}
-@media (max-width:900px){.side{background:var(--glass-strong);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur)}.side .box{background:transparent;border:0;box-shadow:none;padding:0}}
-.sortbar select,.filterbtn,.btn,.add{background:var(--pill);border:1px solid var(--glass-line);box-shadow:inset 0 1px 0 var(--glass-hi);color:var(--fg)}
-.add:hover,.btn:hover{background:var(--glass-strong)}
-.tag{background:var(--pill);border-color:var(--glass-line)}
-.sheet,.v3d{background:var(--glass-strong);border:1px solid var(--glass-line)}
-.v3stage{background:var(--sunk)}
-footer{background:var(--glass)!important;border-top:1px solid var(--glass-line)}
-
-/* brand red, glassy */
-.buy,.btn-solid,.medida,.btn.wa{background:linear-gradient(180deg,var(--red1),var(--red2));color:#fff;border:1px solid rgb(255 255 255/.18);box-shadow:inset 0 1px 0 rgb(255 255 255/.35),0 8px 20px -8px var(--red-glow)}
-.buy:hover,.btn-solid:hover,.medida:hover,.btn.wa:hover{background:linear-gradient(180deg,#d8463a,var(--red1));filter:none;opacity:1}
-.btn-line{color:var(--link);border-color:var(--link);background:var(--pill);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur)}
-.btn-line:hover{background:linear-gradient(180deg,var(--red1),var(--red2));color:#fff;border-color:transparent}
-.cartn{background:linear-gradient(180deg,var(--red1),var(--red2));color:#fff}
-.showcase span em,.b3d,.clear,.crumbs b{color:var(--link)}
-.strip button[aria-pressed="true"] .ci{box-shadow:0 0 0 2px var(--link),var(--shadow)}
-.strip button[aria-pressed="true"]{color:var(--link)}
-.hero h1{color:var(--fg)}
-.opt input,.range input{accent-color:var(--red2)}
-.stock.ok{color:var(--muted)}
-.add.done{background:linear-gradient(180deg,#34a853,#1e7e3c);color:#fff;border-color:transparent}
-.ctotal b,.v3foot .now{color:var(--fg)}
+/* ===== Refined minimal: flat surfaces, ink actions, red only as marks ===== */
+.top{-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--surface);border-bottom:1px solid var(--line)}
+.announce{background:var(--surface);border-bottom:1px solid var(--line);color:var(--muted);font-size:13.5px}
+.announce a{color:var(--fg);text-decoration:underline;text-underline-offset:3px}
+.medida{background:transparent;color:var(--red);border:1px solid var(--red);font-weight:500}
+.medida:hover{background:var(--red);color:#fff;opacity:1}
+.cartn{background:var(--red);color:#fff}
+.searchbox input{background:var(--sunk)}
+.btn-solid{background:var(--fg);color:var(--bg)}
+.btn-solid:hover{background:color-mix(in srgb,var(--fg) 82%,var(--bg))}
+.btn-line{border-color:var(--line);color:var(--fg)}
+.btn-line:hover{background:var(--sunk);color:var(--fg)}
+.hero h1{font-weight:600}
+.showcase button,.card,.promise,.strip button .ci,.empty,.notice{box-shadow:none;border:1px solid var(--line)}
+.showcase button:hover,.card:hover{transform:none;box-shadow:none;border-color:color-mix(in srgb,var(--fg) 30%,var(--line))}
+.strip button:hover .ci{box-shadow:none;border-color:color-mix(in srgb,var(--fg) 30%,var(--line))}
+.strip button[aria-pressed="true"] .ci{box-shadow:none;border-color:var(--red)}
+.strip button[aria-pressed="true"]{color:var(--fg);font-weight:600}
+.showcase span em,.b3d{color:var(--muted)}
+.showcase span b{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.strip button{min-width:0}
+.strip button{overflow-wrap:anywhere;text-align:center;line-height:1.3}
+.brandline{color:var(--muted)}
+.badge{color:var(--red)}
+.buy{background:var(--fg);color:var(--bg)}
+.buy:hover{background:color-mix(in srgb,var(--fg) 82%,var(--bg))}
+.add{background:transparent;border:1px solid var(--line);color:var(--fg)}
+.add:hover{background:var(--sunk)}
+.info h3{overflow-wrap:anywhere}
+.meta{overflow-wrap:anywhere}
+.ph{padding:18px}
+.card{min-width:0;overflow:hidden}
+.btn.wa{background:var(--fg);color:var(--bg);border:0}
+.clear{color:var(--fg);text-decoration:underline;text-underline-offset:3px}
+.tag{background:var(--sunk);border:0}
+footer{background:var(--sunk)}
+.scrim{-webkit-backdrop-filter:none;backdrop-filter:none}
+.opt input,.range input{accent-color:var(--fg)}
+.v3tools .btn[aria-pressed="true"]{background:var(--sunk);border-color:var(--fg)}
 </style>
 
 <script type="application/json" id="catalogo">__CATALOGO__</script>

@@ -323,11 +323,106 @@ footer{background:var(--sunk)}
 .ph img,.showcase img,.strip .ci img,.citem .ph img{min-width:0;min-height:0;max-width:100%;max-height:100%;width:100%;height:100%;object-fit:contain}
 .showcase button{align-content:start}
 .showcase span{min-width:0;width:100%}
+
+/* ===== Store layout: top bar, banner carousel, category rail, product rail, split banner, social strip, dark footer ===== */
+.announce{display:none}
+.topbar{background:var(--fg);color:var(--bg);text-align:center;font-size:13px;padding:8px 16px;letter-spacing:-.005em}
+.topbar span{font-variant-numeric:tabular-nums;font-weight:600}
+.banner{position:relative;background:var(--sunk);border-bottom:1px solid var(--line);overflow:hidden}
+.bwrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:32px;align-items:center;min-height:min(62vh,560px);padding-block:44px}
+.bcopy{display:grid;gap:14px;align-content:center;min-width:0;padding-left:44px}
+.bcopy h1{font-size:clamp(34px,4.4vw,58px);line-height:1.05;font-weight:600;letter-spacing:-.03em;overflow-wrap:anywhere}
+.bcopy p{margin:0;color:var(--muted);font-size:18px;max-width:40ch}
+.bcopy .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px}
+.bart{border:0;background:none;padding:0;cursor:pointer;min-width:0;width:100%;aspect-ratio:1.35;display:grid;place-items:center;overflow:hidden}
+.bart img{width:100%;height:100%;object-fit:contain;min-width:0;min-height:0}
+.bart svg{width:70%;height:auto;color:var(--muted)}
+.barrow{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--fg);display:grid;place-items:center;z-index:2}
+.barrow:hover{border-color:var(--fg)}
+.barrow svg{width:18px;height:18px}
+.barrow.prev{left:16px}.barrow.next{right:16px}
+.bdots{position:absolute;left:0;right:0;bottom:18px;display:flex;justify-content:center;gap:8px}
+.bdots button{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:var(--line)}
+.bdots button[aria-selected="true"]{background:var(--red);width:22px;border-radius:4px}
+@media (prefers-reduced-motion:no-preference){.fade{animation:hfade .45s ease both}@keyframes hfade{from{opacity:0;transform:translateY(6px)}}}
+@media (max-width:860px){
+  .bwrap{grid-template-columns:minmax(0,1fr);min-height:0;padding-block:24px 56px;gap:8px}
+  .bart{order:-1;aspect-ratio:1.5}
+  .bcopy{padding-left:0;text-align:center;justify-items:center}
+  .bcopy .ctas{justify-content:center}
+  .barrow{top:30%}.barrow.prev{left:8px}.barrow.next{right:8px}
+}
+
+.rail{margin-top:56px}
+.railhead{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:18px}
+.railhead h2{font-size:clamp(24px,2.6vw,32px);font-weight:600;letter-spacing:-.025em}
+.railnav{display:flex;align-items:center;gap:8px}
+.railnav button{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;color:var(--fg)}
+.railnav button:hover{border-color:var(--fg)}
+.railnav button svg{width:16px;height:16px}
+.seeall{font-size:15px;text-decoration:none;color:var(--fg);margin-right:8px;white-space:nowrap}
+.seeall:hover{text-decoration:underline;text-underline-offset:3px}
+.track{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 32px)/3);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:4px}
+.track::-webkit-scrollbar{display:none}
+.track>*{scroll-snap-align:start;min-width:0}
+.track.cards{grid-auto-columns:calc((100% - 48px)/4)}
+@media (max-width:1024px){.track{grid-auto-columns:calc((100% - 16px)/2)}.track.cards{grid-auto-columns:calc((100% - 32px)/3)}}
+@media (max-width:640px){.track{grid-auto-columns:78%}.track.cards{grid-auto-columns:72%}.railnav button{display:none}}
+
+/* category cards (the strip, restyled as big cards) */
+.cats{display:none}
+.strip{display:block}
+.strip .track{margin:0;padding-inline:0}
+.strip button{width:auto;display:block;position:relative;border:1px solid var(--line);background:var(--surface);border-radius:var(--r-lg);padding:0;overflow:hidden;text-align:center;color:var(--fg);font-size:17px;font-weight:600}
+.strip button .ci{width:100%;height:auto;aspect-ratio:1.25;border:0;border-radius:0;background:var(--sunk);box-shadow:none;display:grid;place-items:center;padding:20px;overflow:hidden}
+.strip button .ci img{width:100%;height:100%;object-fit:contain;padding:0}
+.strip button .ci svg{width:58%}
+.strip button>span:last-child,.strip button{line-height:1.3}
+.strip button .lbl{display:block;padding:14px 14px 16px;overflow-wrap:anywhere}
+.strip button:hover{border-color:color-mix(in srgb,var(--fg) 30%,var(--line))}
+.strip button[aria-pressed="true"]{border-color:var(--red);color:var(--fg)}
+.strip button[aria-pressed="true"] .ci{border:0}
+
+/* split banner */
+.split{display:grid;grid-template-columns:1fr 1fr;margin-top:64px;min-height:360px}
+.sdark{background:var(--fg);color:var(--bg);padding:48px 44px;display:grid;align-content:center;gap:14px;border-radius:var(--r-lg) 0 0 var(--r-lg)}
+.sdark h2{color:var(--bg);font-size:clamp(26px,3vw,38px);font-weight:600;letter-spacing:-.025em}
+.sdark p{margin:0;color:color-mix(in srgb,var(--bg) 78%,var(--fg));max-width:44ch}
+.slink{color:var(--bg);text-decoration:none;font-weight:600;margin-top:6px;justify-self:start;border-bottom:1px solid var(--red);padding-bottom:2px}
+.slink:hover{color:#fff}
+.simg{border:1px solid var(--line);border-left:0;background:var(--sunk);border-radius:0 var(--r-lg) var(--r-lg) 0;display:grid;place-items:center;padding:28px;cursor:pointer;min-width:0;overflow:hidden}
+.simg img{width:100%;height:100%;max-height:340px;object-fit:contain;min-width:0;min-height:0}
+.simg svg{width:60%;color:var(--muted)}
+@media (max-width:760px){.split{grid-template-columns:minmax(0,1fr)}.sdark{border-radius:var(--r-lg) var(--r-lg) 0 0;padding:32px 24px}.simg{border-left:1px solid var(--line);border-top:0;border-radius:0 0 var(--r-lg) var(--r-lg);aspect-ratio:1.4}}
+
+.sechead{margin-top:72px}
+
+/* social strip + dark footer */
+.social{background:var(--sunk);border-top:1px solid var(--line);padding-block:36px}
+.socwrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:18px 32px}
+.socwrap small{color:var(--muted);font-size:13px}
+.socwrap h2{font-size:clamp(22px,2.4vw,28px);font-weight:600;letter-spacing:-.02em}
+.soclinks{display:flex;flex-wrap:wrap;gap:10px}
+.soclinks a{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg);text-decoration:none;padding:10px 16px;border-radius:999px;font-size:14.5px}
+.soclinks a:hover{border-color:var(--fg)}
+.soclinks svg{width:18px;height:18px}
+footer{background:#161414!important;color:#e9e6e4;border-top:0}
+footer h3{color:#ffffff}
+footer a{color:#cfcac7}
+footer a:hover{color:#ffffff}
+footer p,footer ul{color:#b9b3b0}
+footer .legal{border-top-color:rgb(255 255 255/.12);color:#8f8885}
+footer .fgrid{grid-template-columns:1.5fr 1fr 1fr 1fr}
+footer .flogo{filter:none}
+@media (max-width:900px){footer .fgrid{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){footer .fgrid{grid-template-columns:minmax(0,1fr)}}
+.card{height:100%}
 </style>
 
-<script type="application/json" id="catalogo">__CATALOGO__</script>
+<script type="application/json" id="datosCatalogo">__CATALOGO__</script>
 <script type="application/json" id="logos">__LOGOS__</script>
 
+<div class="topbar">Muebles listos para entrega y a medida. Pide por WhatsApp al <span id="numTop"></span></div>
 <header class="top">
   <div class="wrap">
     <div class="brandbox">
@@ -344,26 +439,46 @@ footer{background:var(--sunk)}
     </div>
   </div>
 </header>
-<div class="announce">Pide por WhatsApp y te confirmamos disponibilidad y entrega. <a href="#catalogo">Ver catálogo ›</a></div>
 
-<div class="wrap" id="inicio">
-  <section class="hero" aria-labelledby="heroTitle">
-    <h1 id="heroTitle">Muebles López</h1>
-    <p>Hechos en nuestro taller. Listos para tu casa.</p>
-    <div class="ctas">
-      <a class="btn-solid" href="#catalogo">Ver catálogo</a>
-      <a class="btn-line" id="heroMedida" href="#" target="_blank" rel="noopener"><span id="waIco2"></span>Cotizar a medida</a>
+
+<div id="inicio">
+  <section class="banner" aria-roledescription="carrusel" aria-label="Colecciones destacadas">
+    <div class="wrap bwrap">
+      <div class="bcopy" id="heroStage">
+        <h1 id="heroTitle">Muebles López</h1>
+        <p id="heroSub">Hechos en nuestro taller, listos para tu casa.</p>
+        <div class="ctas"><a class="btn-solid" id="heroGo" href="#catalogo">Ver colección</a><a class="btn-line" id="heroMedida" href="#" target="_blank" rel="noopener"><span id="waIco2"></span>Cotizar a medida</a></div>
+      </div>
+      <button type="button" class="bart" id="heroArt" aria-label="Ver en 3D"></button>
     </div>
-    <div class="showcase" id="showcase" aria-label="Algunos muebles disponibles"></div>
+    <button type="button" class="barrow prev" id="heroPrev" aria-label="Colección anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>
+    <button type="button" class="barrow next" id="heroNext" aria-label="Colección siguiente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>
+    <div class="bdots" id="heroDots" role="tablist" aria-label="Elegir colección"></div>
   </section>
-  <section class="cats" aria-labelledby="catsTitle">
-    <h2 id="catsTitle">Compra por categoría</h2>
-    <nav class="strip" aria-label="Categorías"><div class="wrap" id="strip"></div></nav>
+
+  <section class="wrap rail" aria-labelledby="catsTitle">
+    <div class="railhead"><h2 id="catsTitle">Compra por categoría</h2><div class="railnav"><button type="button" data-rail="strip" data-dir="-1" aria-label="Anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button><button type="button" data-rail="strip" data-dir="1" aria-label="Siguiente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button></div></div>
+    <nav class="strip" aria-label="Categorías"><div class="track" id="strip"></div></nav>
+  </section>
+
+  <section class="wrap rail" aria-labelledby="featTitle">
+    <div class="railhead"><h2 id="featTitle">Listos para entrega</h2><div class="railnav"><a class="seeall" href="#catalogo">Ver todos <span aria-hidden="true">→</span></a><button type="button" data-rail="feat" data-dir="-1" aria-label="Anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button><button type="button" data-rail="feat" data-dir="1" aria-label="Siguiente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button></div></div>
+    <div class="track cards" id="feat"></div>
+  </section>
+
+  <section class="wrap split" aria-labelledby="splitTitle">
+    <div class="sdark">
+      <h2 id="splitTitle">¿Necesitas otra medida?</h2>
+      <p>Fabricamos el mueble con las medidas y el color que necesitas. Cuéntanos qué buscas y te cotizamos por WhatsApp.</p>
+      <a class="slink" id="splitMedida" href="#" target="_blank" rel="noopener">Cotizar a medida <span aria-hidden="true">→</span></a>
+    </div>
+    <button type="button" class="simg" id="splitArt" aria-label="Ver en 3D"></button>
   </section>
 </div>
+<div id="showcase" hidden></div>
 
 <main class="wrap" id="catalogo">
-  <div class="sechead"><h2>Todos los muebles</h2><div class="crumbs"><span>Catálogo</span><span aria-hidden="true">/</span><b id="crumb">Todos los muebles</b></div></div>
+  <div class="sechead"><h2>Todos los muebles</h2><div class="crumbs" hidden><span>Catálogo</span><span aria-hidden="true">/</span><b id="crumb">Todos los muebles</b></div></div>
   <div class="notice" id="exNotice" hidden>Catálogo de muestra: estos muebles son ejemplos mientras cargamos el inventario real.</div>
 
   <div class="shop">
@@ -399,14 +514,25 @@ footer{background:var(--sunk)}
   </div>
 </main>
 
+<section class="social" aria-labelledby="socTitle">
+  <div class="wrap socwrap">
+    <div><small>Síguenos y entérate primero</small><h2 id="socTitle">Muebles nuevos cada semana</h2></div>
+    <div class="soclinks">
+      <a href="https://www.instagram.com/muebleslopezec/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor"/></svg>Instagram</a>
+      <a href="https://www.tiktok.com/@muebleslopezec" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5M14 3c.4 2.6 2.2 4.4 5 4.7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>TikTok</a>
+      <a id="socWa" href="#" target="_blank" rel="noopener" aria-label="WhatsApp"><span id="waIco3"></span>WhatsApp</a>
+    </div>
+  </div>
+</section>
 <footer>
   <div class="wrap">
     <div class="fgrid">
       <div><img class="flogo" id="logoF" alt="Muebles López"><p>Muebles de cocina, sala y dormitorio fabricados en nuestro taller en Ecuador.</p></div>
-      <div><h3>Pedidos y cotizaciones</h3><ul><li>WhatsApp <span id="numTxt"></span></li><li><a id="footMedida" href="#" target="_blank" rel="noopener">Cotizar un mueble a medida</a></li><li><a href="#catalogo">Ver catálogo</a></li></ul></div>
-      <div><h3>Síguenos</h3><ul><li><a href="https://www.instagram.com/muebleslopezec/" target="_blank" rel="noopener">Instagram @muebleslopezec</a></li><li><a href="https://www.tiktok.com/@muebleslopezec" target="_blank" rel="noopener">TikTok @muebleslopezec</a></li></ul></div>
+      <div><h3>Tienda</h3><ul><li><a href="#catalogo">Todos los muebles</a></li><li><a href="#inicio">Colecciones</a></li><li><a id="footMedida" href="#" target="_blank" rel="noopener">Muebles a medida</a></li></ul></div>
+      <div><h3>Atención</h3><ul><li>WhatsApp <span id="numTxt"></span></li><li>Pedidos y cotizaciones por WhatsApp</li></ul></div>
+      <div><h3>Síguenos</h3><ul><li><a href="https://www.instagram.com/muebleslopezec/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.tiktok.com/@muebleslopezec" target="_blank" rel="noopener">TikTok</a></li></ul></div>
     </div>
-    <div class="legal">Precios en dólares con IVA incluido. Imágenes y modelos 3D referenciales.</div>
+    <div class="legal">Precios en dólares con IVA incluido. Imágenes y modelos 3D referenciales. © Muebles López</div>
   </div>
 </footer>
 
@@ -435,7 +561,7 @@ footer{background:var(--sunk)}
 (function(){
   var $=function(id){return document.getElementById(id)};
   var DATA={tienda:{},muebles:[]};
-  try{DATA=JSON.parse($("catalogo").textContent)}catch(e){}
+  try{DATA=JSON.parse($("datosCatalogo").textContent)}catch(e){}
   try{var LG=JSON.parse($("logos").textContent);$("logoL").src=LG.light;$("logoD").src=LG.dark;$("logoF").src=LG.dark}catch(e){}
   var T=DATA.tienda||{}, NUM=String(T.whatsapp||"").replace(/\D/g,"");
   var WA=function(sz){return '<svg width="'+sz+'" height="'+sz+'" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.3Z"/></svg>'};
@@ -502,7 +628,7 @@ footer{background:var(--sunk)}
     $("strip").innerHTML=["Todos"].concat(cats).map(function(c){
       var rep1=c==="Todos"?null:items.find(function(x){return x.tipo===c});
       var art=rep1?photo(rep1):'<svg viewBox="0 0 24 24" aria-hidden="true" style="width:40%"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>';
-      return '<button type="button" data-c="'+esc(c)+'" aria-pressed="'+(c===S.cat)+'"><span class="ci">'+art+'</span>'+(c==="Todos"?"Todos":esc(c))+'</button>'}).join("");
+      return '<button type="button" data-c="'+esc(c)+'" aria-pressed="'+(c===S.cat)+'"><span class="ci">'+art+'</span><span class="lbl">'+(c==="Todos"?"Todos los muebles":esc(c))+'</span></button>'}).join("");
     var bc=base("cat");
     $("fCat").innerHTML=["Todos"].concat(cats).map(function(c){var n=c==="Todos"?bc.length:bc.filter(function(x){return x.tipo===c}).length;return '<label class="opt"><input type="radio" name="cat" value="'+esc(c)+'"'+(c===S.cat?" checked":"")+'> '+(c==="Todos"?"Todas":esc(c))+' <small>'+n+'</small></label>'}).join("");
     var bm=base("mat");
@@ -514,15 +640,39 @@ footer{background:var(--sunk)}
     $("crumb").textContent=S.cat==="Todos"?"Todos los muebles":S.cat;$("hTitle").textContent=S.cat==="Todos"?"Muebles":S.cat;
   }
 
-  function renderShowcase(){
-    var seen={},pick=[];
-    items.forEach(function(x){var k=(x.tipo||"")+(x.subtipo||"");if(!seen[k]&&pick.length<3){seen[k]=1;pick.push(x)}});
-    items.forEach(function(x){if(pick.length<3&&pick.indexOf(x)<0)pick.push(x)});
-    $("showcase").innerHTML=pick.map(function(x){
-      var same=items.filter(function(y){return y.tipo===x.tipo&&(y.subtipo||"")===(x.subtipo||"")}),min=Math.min.apply(null,same.map(function(y){return Number(y.precio)}));
-      return '<button type="button" data-v3="'+esc(x.id)+'" aria-label="Ver '+esc(title(x))+' en 3D"><div class="art">'+photo(x)+'</div><span><b>'+esc(title(x))+'</b><small>Desde '+money(min)+'</small><em>Ver en 3D ›</em></span></button>'}).join("");
-    $("showcase").hidden=!pick.length;
+  function minFor(f){var p=items.filter(f).map(function(y){return Number(y.precio)});return p.length?Math.min.apply(null,p):0}
+  var H={i:0,timer:0,list:[]};
+  function heroSlides(){
+    return cats.map(function(c){var g=items.filter(function(x){return x.tipo===c});var big=g.slice().sort(function(a,b){return (Number(b.ancho)||0)-(Number(a.ancho)||0)})[0];return {cat:c,x:big,n:g.length,min:minFor(function(x){return x.tipo===c})}}).filter(function(o){return o.x});
   }
+  function paintHero(anim){
+    var o=H.list[H.i];if(!o)return;
+    $("heroArt").innerHTML=photo(o.x);$("heroArt").dataset.v3=o.x.id;$("heroArt").setAttribute("aria-label","Ver "+title(o.x)+" en 3D");
+    $("heroTitle").textContent=o.cat;
+    $("heroSub").textContent=o.n+(o.n===1?" mueble disponible":" muebles disponibles")+", desde "+money(o.min)+". Hechos en nuestro taller.";
+    $("heroGo").dataset.c=o.cat;
+    $("heroDots").innerHTML=H.list.map(function(_,k){return '<button type="button" role="tab" aria-selected="'+(k===H.i)+'" aria-label="'+esc(H.list[k].cat)+'" data-k="'+k+'"></button>'}).join("");
+    var many=H.list.length>1;$("heroPrev").hidden=!many;$("heroNext").hidden=!many;$("heroDots").hidden=!many;
+    if(anim){[$("heroStage"),$("heroArt")].forEach(function(n){n.classList.remove("fade");void n.offsetWidth;n.classList.add("fade")})}
+  }
+  function heroGo(d){if(!H.list.length)return;H.i=(H.i+d+H.list.length)%H.list.length;paintHero(true)}
+  function heroAuto(){clearInterval(H.timer);if(reduce||H.list.length<2)return;H.timer=setInterval(function(){if(!document.hidden&&$("v3d").hidden&&$("cart").hidden)heroGo(1)},7000)}
+  function renderShowcase(){
+    H.list=heroSlides();if(H.i>=H.list.length)H.i=0;paintHero(false);
+    var feat=items.filter(inStock).slice().sort(function(a,b){return (Number(b.stock)-Number(a.stock))||(a._i-b._i)}).slice(0,10);
+    $("feat").innerHTML=feat.map(cardHTML).join("");
+    var sp=items.find(function(x){return /bajo/i.test(x.subtipo||"")})||items[0];
+    if(sp){$("splitArt").innerHTML=photo(sp);$("splitArt").dataset.v3=sp.id;$("splitArt").setAttribute("aria-label","Ver "+title(sp)+" en 3D")}
+  }
+  function cardHTML(x){
+      var a=avail(x),d=dims(x),o=off(x),mat=[x.material,x.color].filter(Boolean).join(" · ");
+      return '<article class="card"><button type="button" class="ph" data-v3="'+esc(x.id)+'" aria-label="Ver '+esc(title(x))+' en 3D">'+photo(x)+'<span class="stock '+a.c+'">'+a.t+'</span>'+(o?'<span class="badge">-'+o+'%</span>':'')+(x.ejemplo?'<span class="ex">Ejemplo</span>':(!hasPhoto(x)&&TH[x.id]?'<span class="ex">Imagen referencial</span>':''))+'<span class="b3d">'+CUBE+'Ver en 3D</span></button>'+
+        '<div class="info"><h3>'+esc(title(x))+(mat?' | '+esc(mat):'')+'</h3><div class="brandline">'+esc([x.tipo,x.subtipo].filter(Boolean).join(", "))+'</div>'+
+        '<div class="meta">'+(x.sku?'SKU: <span class="mono">'+esc(x.sku)+'</span>':'')+(d?'<br>Medidas: <span class="mono">'+d+'</span>':'')+'</div>'+
+        '<div class="prices"><span class="now">'+money(x.precio)+'</span>'+(o?'<span class="was">'+money(x.precioAnterior)+'</span>':'')+'</div><div class="iva">IVA incluido</div></div>'+
+        '<div class="acts"><button type="button" class="add" data-add="'+esc(x.id)+'">Añadir al carrito</button>'+
+        '<a class="buy" href="'+esc(wa(buyMsg(x)))+'" target="_blank" rel="noopener" aria-label="Comprar '+esc(title(x))+' por WhatsApp">'+WA(16)+'Comprar</a></div></article>';
+    }
   function render(){
     renderShowcase();
     renderFilters();
@@ -534,15 +684,7 @@ footer{background:var(--sunk)}
     $("count").textContent=list.length+(list.length===1?" resultado":" resultados");
     if(!items.length){$("grid").innerHTML='<div class="empty"><h3>Estamos actualizando el catálogo</h3><p>Escríbenos por WhatsApp y te contamos qué tenemos disponible hoy.</p></div>';return}
     if(!list.length){$("grid").innerHTML='<div class="empty"><h3>No hay muebles con estos filtros</h3><p>Quita algún filtro o prueba con otra palabra.</p></div>';return}
-    $("grid").innerHTML=list.map(function(x){
-      var a=avail(x),d=dims(x),o=off(x),mat=[x.material,x.color].filter(Boolean).join(" · ");
-      return '<article class="card"><button type="button" class="ph" data-v3="'+esc(x.id)+'" aria-label="Ver '+esc(title(x))+' en 3D">'+photo(x)+'<span class="stock '+a.c+'">'+a.t+'</span>'+(o?'<span class="badge">-'+o+'%</span>':'')+(x.ejemplo?'<span class="ex">Ejemplo</span>':(!hasPhoto(x)&&TH[x.id]?'<span class="ex">Imagen referencial</span>':''))+'<span class="b3d">'+CUBE+'Ver en 3D</span></button>'+
-        '<div class="info"><h3>'+esc(title(x))+(mat?' | '+esc(mat):'')+'</h3><div class="brandline">'+esc([x.tipo,x.subtipo].filter(Boolean).join(", "))+'</div>'+
-        '<div class="meta">'+(x.sku?'SKU: <span class="mono">'+esc(x.sku)+'</span>':'')+(d?'<br>Medidas: <span class="mono">'+d+'</span>':'')+'</div>'+
-        '<div class="prices"><span class="now">'+money(x.precio)+'</span>'+(o?'<span class="was">'+money(x.precioAnterior)+'</span>':'')+'</div><div class="iva">IVA incluido</div></div>'+
-        '<div class="acts"><button type="button" class="add" data-add="'+esc(x.id)+'">Añadir al carrito</button>'+
-        '<a class="buy" href="'+esc(wa(buyMsg(x)))+'" target="_blank" rel="noopener" aria-label="Comprar '+esc(title(x))+' por WhatsApp">'+WA(16)+'Comprar</a></div></article>';
-    }).join("");
+    $("grid").innerHTML=list.map(cardHTML).join("");
   }
 
   /* events */
@@ -560,10 +702,12 @@ footer{background:var(--sunk)}
   $("sideClose").addEventListener("click",closeAll);
 
   /* whatsapp */
+  try{$("numTop").textContent=T.whatsappTexto||("+"+NUM);$("waIco3").innerHTML=WA(18);$("waIco3").style.display="flex"}catch(_){}
   $("numTxt").textContent=T.whatsappTexto||("+"+NUM);
   var hello=wa("Hola Muebles López, quisiera información sobre sus muebles.");
+  try{$("socWa").href=hello}catch(_){}
   var MED=wa("Hola Muebles López 👋\nQuiero cotizar un mueble a medida.\n• Tipo de mueble: \n• Medidas aproximadas: \n• Material o color: \n¿Me pueden ayudar con la cotización?");
-  ["medida","heroMedida","footMedida"].forEach(function(i){$(i).href=MED});
+  ["medida","heroMedida","footMedida","splitMedida"].forEach(function(i){$(i).href=MED});
   $("waIco2").innerHTML=WA(18);
   $("topWa").href=hello;$("waIco1").innerHTML=WA(26);
   function closeAll(){$("scrim").hidden=true;$("cart").hidden=true;$("v3d").hidden=true;if(V)V.open=false;side.classList.remove("open")}
@@ -630,7 +774,7 @@ footer{background:var(--sunk)}
   $("cartBtn").addEventListener("click",openCart);
   ["pointerdown","click"].forEach(function(ev){$("cBuy").addEventListener(ev,function(){$("cBuy").href=wa(cartMsg())})});
   $("cClose").addEventListener("click",closeAll);
-  $("grid").addEventListener("click",function(e){var b=e.target.closest("button[data-add]");if(b)addToCart(b.dataset.add,b)});
+  [$("grid"),$("feat")].forEach(function(n){n.addEventListener("click",function(e){var b=e.target.closest("button[data-add]");if(b)addToCart(b.dataset.add,b)})});
   $("cList").addEventListener("click",function(e){
     var t=e.target.closest("button");if(!t)return;
     var k=t.dataset.inc||t.dataset.dec||t.dataset.rm;if(!k)return;
@@ -842,7 +986,13 @@ footer{background:var(--sunk)}
       catch(e){$("v3Msg").textContent="Este navegador no puede mostrar el modelo 3D. Prueba desde otro navegador o celular.";$("v3Hint").hidden=true}
     },function(){$("v3Msg").textContent="No se pudo cargar el visor 3D. Revisa tu conexión e inténtalo de nuevo.";$("v3Hint").hidden=true});
   }
-  [$("grid"),$("showcase")].forEach(function(n){n.addEventListener("click",function(e){var b=e.target.closest("[data-v3]");if(b)open3D(b.dataset.v3)})});
+  [$("grid"),$("feat"),$("heroArt"),$("splitArt")].forEach(function(n){n.addEventListener("click",function(e){var b=e.target.closest("[data-v3]");if(b)open3D(b.dataset.v3)})});
+  $("heroPrev").addEventListener("click",function(){heroGo(-1);heroAuto()});
+  $("heroNext").addEventListener("click",function(){heroGo(1);heroAuto()});
+  $("heroDots").addEventListener("click",function(e){var b=e.target.closest("button[data-k]");if(!b)return;H.i=Number(b.dataset.k);paintHero(true);heroAuto()});
+  $("heroGo").addEventListener("click",function(e){var c=this.dataset.c;if(!c)return;e.preventDefault();S.cat=c;render();try{$("catalogo").scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"})}catch(_){}});
+  document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("button[data-rail]");if(!b)return;var t=$(b.dataset.rail);if(!t)return;var step=t.clientWidth*0.9*Number(b.dataset.dir);try{t.scrollBy({left:step,behavior:reduce?"auto":"smooth"})}catch(_){t.scrollLeft+=step}});
+  heroAuto();
   $("v3Close").addEventListener("click",closeAll);
   $("v3Acts").addEventListener("click",function(e){var b=e.target.closest("button[data-add]");if(b)addToCart(b.dataset.add,b)});
   $("v3Doors").addEventListener("click",function(){V.target=V.target?0:1;var z=V.sel&&kind(V.sel)==="zapatera";this.textContent=V.target?(z?"Cerrar compartimentos":"Cerrar puertas"):(z?"Abrir compartimentos":"Abrir puertas")});

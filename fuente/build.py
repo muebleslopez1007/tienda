@@ -57,6 +57,13 @@ def main():
     html = open(os.path.join(here, "template.html")).read()
     html = html.replace("__CATALOGO__", data).replace("__LOGOS__", logos)
     open(os.path.join(here, "tienda.html"), "w").write(html)
+    # Página independiente para GitHub Pages / Wix: documento completo con doctype, viewport y reset.
+    page = ('<!doctype html><html lang="es"><head><meta charset="utf-8">'
+            '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
+            '<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}'
+            'html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style></head><body>'
+            + html + '</body></html>')
+    open(os.path.join(here, "index.html"), "w").write(page)
     print("tienda.html", len(html), "bytes,", len(cat["muebles"]), "muebles")
 
 main()
